@@ -8,3 +8,7 @@ class TestMe extends munit.FunSuite:
     val result = SayHello.say()
     assertEquals(result, "hello")
   }
+  test("bye works") {
+    val result = SayHello.bye()
+    assertEquals(result, "bye!")
+  }
