@@ -18,6 +18,7 @@ jobs:
       - uses: olafurpg/setup-gpg@v3
         if: github.event.ref_type == 'tag'
       - name: Show
+        if: github.event.ref_type == 'tag'
         run: git rev-parse --abbrev-ref HEAD
 #      - run: sbt ci-release
 #        if: github.event.ref_type == 'tag'
