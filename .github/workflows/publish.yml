@@ -6,6 +6,7 @@ jobs:
   publish:
     runs-on: ubuntu-20.04
     steps:
+#      - run: git checkout "${GITHUB_REF:11}"
       - uses: actions/checkout@v2.3.4
         if: github.event.ref_type == 'tag'
         with:
@@ -20,7 +21,10 @@ jobs:
         if: github.event.ref_type == 'tag'
       - name: Show
         if: github.event.ref_type == 'tag'
-        run: git rev-parse --abbrev-ref HEAD
+        run: sbt publishLocal
+#      - name: Show
+#        if: github.event.ref_type == 'tag'
+#        run: git rev-parse --abbrev-ref HEAD
 #      - run: sbt ci-release
 #        if: github.event.ref_type == 'tag'
 #        env:
