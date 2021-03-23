@@ -6,7 +6,7 @@ jobs:
   publish:
     runs-on: ubuntu-20.04
     steps:
-      - run: git checkout "${GITHUB_REF:11}"
+#      - run: git checkout "${GITHUB_REF:11}"
       - uses: actions/checkout@v2.3.4
         if: github.event.ref_type == 'tag'
         with:
