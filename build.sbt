@@ -9,7 +9,8 @@ inThisBuild(List(
       "gzoller@outlook.com",
       url("http://www.blocke.co")
     )
-  )
+  ),
+  isSnapshot := true
 ))
 
 name := "deploysample"
