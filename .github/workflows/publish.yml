@@ -11,7 +11,7 @@ jobs:
         if: github.event.ref_type == 'tag'
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
+#          ref: ${{ github.event.pull_request.head.ref }}
 #      - name: Reattach HEAD
 #        if: github.event.ref_type == 'tag'
 #        run: git checkout "$(echo ${{ github.ref }} | sed -E 's|refs/[a-zA-Z]+/||')"
