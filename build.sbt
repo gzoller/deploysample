@@ -23,11 +23,7 @@ lazy val root = (project in file("."))
   .settings(
     crossScalaVersions := Nil,
     doc := null,  // disable dottydoc for now
-    sources in (Compile, doc) := Seq(),
-    Test / parallelExecution := false,
-    libraryDependencies ++= Seq(
-      "org.scalameta"  %% "munit" % "0.7.22" % Test
-    )
+    sources in (Compile, doc) := Seq()
   )
   .aggregate(core,library)
 
@@ -67,5 +63,9 @@ lazy val compilerOptions = Seq(
 
 lazy val commonSettings = Seq(
   scalacOptions ++= compilerOptions,
+  Test / parallelExecution := false,
+  libraryDependencies ++= Seq(
+    "org.scalameta"  %% "munit" % "0.7.22" % Test
+  ),
   scalaVersion := "3.0.0-RC1"
 )
