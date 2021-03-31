@@ -15,23 +15,35 @@ inThisBuild(List(
 
 name := "deploysample"
 organization in ThisBuild := "co.blocke"
-scalaVersion := "3.0.0-RC1"
 
-lazy val root = project
-  .in(file("."))
+lazy val root = (project in file("."))
+  .settings(settings)
+  .settings(publishArtifact := false)
+  .settings(publish := {})
+  .settings(
+    crossScalaVersions := Nil,
+    doc := null,  // disable dottydoc for now
+    sources in (Compile, doc) := Seq()
+  )
+  .aggregate(core,library)
+
+lazy val core = (project in file("core"))
   .settings(settings)
   .settings(
-    name := "reflection_library",
-    Compile / packageBin / mappings += {
-      (baseDirectory.value / "plugin.properties") -> "plugin.properties"
-    },
+    name := "ds_core",
     doc := null,  // disable dottydoc for now
     sources in (Compile, doc) := Seq(),
-    Test / parallelExecution := false,
-    libraryDependencies ++= Seq(
-      "org.scalameta"  %% "munit" % "0.7.22" % Test
-    )
-  )
+    Test / parallelExecution := false
+  )  
+
+lazy val library = (project in file("library"))
+  .settings(settings)
+  .settings(
+    name := "ds_lib",
+    doc := null,  // disable dottydoc for now
+    sources in (Compile, doc) := Seq(),
+    Test / parallelExecution := false
+  )  
 
 //==========================
 // Settings
@@ -50,5 +62,10 @@ lazy val compilerOptions = Seq(
 )
 
 lazy val commonSettings = Seq(
-  scalacOptions ++= compilerOptions
+  scalacOptions ++= compilerOptions,
+  Test / parallelExecution := false,
+  libraryDependencies ++= Seq(
+    "org.scalameta"  %% "munit" % "0.7.22" % Test
+  ),
+  scalaVersion := "3.0.0-RC1"
 )
