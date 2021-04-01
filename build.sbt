@@ -18,8 +18,7 @@ organization in ThisBuild := "co.blocke"
 
 lazy val root = (project in file("."))
   .settings(settings)
-  .settings(publishArtifact := false)
-  .settings(publish := {})
+  .settings(skip in publish := true)
   .settings(
     crossScalaVersions := Nil,
     doc := null,  // disable dottydoc for now
