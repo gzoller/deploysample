@@ -66,5 +66,5 @@ lazy val commonSettings = Seq(
   libraryDependencies ++= Seq(
     "org.scalameta"  %% "munit" % "0.7.22" % Test
   ),
-  scalaVersion := "3.0.0-RC1"
+  scalaVersion := "3.0.0"
 )
