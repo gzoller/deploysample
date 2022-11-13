@@ -9,8 +9,7 @@ inThisBuild(List(
       "gzoller@outlook.com",
       url("http://www.blocke.co")
     )
-  ),
-  isSnapshot := true
+  )
 ))
 
 name := "deploysample"
@@ -66,5 +65,5 @@ lazy val commonSettings = Seq(
   libraryDependencies ++= Seq(
     "org.scalameta"  %% "munit" % "0.7.25" % Test
   ),
-  scalaVersion := "3.0.0"
+  scalaVersion := "3.2.1"
 )
