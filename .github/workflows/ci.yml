@@ -9,13 +9,50 @@ jobs:
     name: Build
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3.1.0
+      - name: Ignore line ending differences in git
+        if: contains(runner.os, 'windows')
+        shell: bash
+        run: git config --global core.autocrlf false
+
+      - name: Checkout current branch (full)
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Setup JDK 13
         uses: actions/setup-java@v1
         with:
           java-version: '13'
-      - name: Show java
-        run: "java -version"
-      - name: Test
-        run: "sbt test"
+
+      - name: Cache sbt
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.sbt
+            ~/.ivy2/cache
+            ~/.coursier/cache/v1
+            ~/.cache/coursier/v1
+            ~/AppData/Local/Coursier/Cache/v1
+            ~/Library/Caches/Coursier/v1
+          key: ${{ runner.os }}-sbt-cache-v2-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/build.properties') }}
+
+      - name: Check that workflows are up to date
+        shell: bash
+        run: sbt githubWorkflowCheck
+
+      - name: Build project
+        shell: bash
+        run: sbt test
+
+#    steps:
+#      - name: Checkout repo
+#        uses: actions/checkout@v3.1.0
+#      - name: Setup JDK 13
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: '13'
+#      - name: Show java
+#        run: "java -version"
+#      - name: Test
+#        run: "sbt test"
+
