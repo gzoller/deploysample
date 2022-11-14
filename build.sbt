@@ -21,7 +21,8 @@ lazy val root = (project in file("."))
   .settings(
     crossScalaVersions := Nil,
     doc := null,  // disable dottydoc for now
-    (Compile / sources, doc / sources) := Seq()
+    Compile / sources := Seq(),
+    doc / sources := Seq()
   )
   .aggregate(core,library)
 
@@ -30,7 +31,8 @@ lazy val core = (project in file("core"))
   .settings(
     name := "ds_core",
     doc := null,  // disable dottydoc for now
-    (Compile / sources, doc / sources) := Seq()
+    Compile / sources := Seq(),
+    doc / sources := Seq(),
     Test / parallelExecution := false
   )  
 
@@ -39,7 +41,8 @@ lazy val library = (project in file("library"))
   .settings(
     name := "ds_lib",
     doc := null,  // disable dottydoc for now
-    (Compile / sources, doc / sources) := Seq(),
+    Compile / sources := Seq(),
+    doc / sources := Seq(),
     Test / parallelExecution := false
   )  
 
