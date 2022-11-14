@@ -13,15 +13,15 @@ inThisBuild(List(
 ))
 
 name := "deploysample"
-organization in ThisBuild := "co.blocke"
+ThisBuild / organization := "co.blocke"
 
 lazy val root = (project in file("."))
   .settings(settings)
-  .settings(skip in publish := true)
+  .settings(publish / skip := true)
   .settings(
     crossScalaVersions := Nil,
     doc := null,  // disable dottydoc for now
-    sources in (Compile, doc) := Seq()
+    (Compile / sources, doc / sources) := Seq()
   )
   .aggregate(core,library)
 
@@ -30,7 +30,7 @@ lazy val core = (project in file("core"))
   .settings(
     name := "ds_core",
     doc := null,  // disable dottydoc for now
-    sources in (Compile, doc) := Seq(),
+    (Compile / sources, doc / sources) := Seq()
     Test / parallelExecution := false
   )  
 
@@ -39,7 +39,7 @@ lazy val library = (project in file("library"))
   .settings(
     name := "ds_lib",
     doc := null,  // disable dottydoc for now
-    sources in (Compile, doc) := Seq(),
+    (Compile / sources, doc / sources) := Seq(),
     Test / parallelExecution := false
   )  
 
