@@ -31,17 +31,15 @@ lazy val core = (project in file("core"))
   .settings(
     name := "ds_core",
     doc := null,  // disable dottydoc for now
-    Compile / sources := Seq(),
     doc / sources := Seq(),
     Test / parallelExecution := false
-  )  
+  ).dependsOn(library)
 
 lazy val library = (project in file("library"))
   .settings(settings)
   .settings(
     name := "ds_lib",
     doc := null,  // disable dottydoc for now
-    Compile / sources := Seq(),
     doc / sources := Seq(),
     Test / parallelExecution := false
   )  
