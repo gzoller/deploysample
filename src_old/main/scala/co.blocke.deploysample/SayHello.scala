@@ -1,4 +1,4 @@
-package co.blocke.deploysample
+package co.blocke.deploysample.core
 
 object SayHello:
 
