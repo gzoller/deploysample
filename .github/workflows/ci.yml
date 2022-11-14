@@ -1,12 +1,11 @@
 name: Package Build
 # This workflow is triggered on pushes to the repository.
-on: 
-  pull_request:
+on: [pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-20.04
-    name: Build
+  build-and-test:
+    runs-on: ubuntu-latest
+    name: Build and Test
 
     steps:
       - name: Ignore line ending differences in git
@@ -36,9 +35,9 @@ jobs:
             ~/Library/Caches/Coursier/v1
           key: ${{ runner.os }}-sbt-cache-v2-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/build.properties') }}
 
-      - name: Check that workflows are up to date
-        shell: bash
-        run: sbt githubWorkflowCheck
+#      - name: Check that workflows are up to date
+#        shell: bash
+#        run: sbt githubWorkflowCheck
 
       - name: Build project
         shell: bash
