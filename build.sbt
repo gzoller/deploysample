@@ -9,20 +9,20 @@ inThisBuild(List(
       "gzoller@outlook.com",
       url("http://www.blocke.co")
     )
-  ),
-  isSnapshot := true
+  )
 ))
 
 name := "deploysample"
-organization in ThisBuild := "co.blocke"
+ThisBuild / organization := "co.blocke"
 
 lazy val root = (project in file("."))
   .settings(settings)
-  .settings(skip in publish := true)
+  .settings(publish / skip := true)
   .settings(
     crossScalaVersions := Nil,
     doc := null,  // disable dottydoc for now
-    sources in (Compile, doc) := Seq()
+    Compile / sources := Seq(),
+    doc / sources := Seq()
   )
   .aggregate(core,library)
 
@@ -31,16 +31,16 @@ lazy val core = (project in file("core"))
   .settings(
     name := "ds_core",
     doc := null,  // disable dottydoc for now
-    sources in (Compile, doc) := Seq(),
+    doc / sources := Seq(),
     Test / parallelExecution := false
-  )  
+  ).dependsOn(library)
 
 lazy val library = (project in file("library"))
   .settings(settings)
   .settings(
     name := "ds_lib",
     doc := null,  // disable dottydoc for now
-    sources in (Compile, doc) := Seq(),
+    doc / sources := Seq(),
     Test / parallelExecution := false
   )  
 
@@ -64,7 +64,7 @@ lazy val commonSettings = Seq(
   scalacOptions ++= compilerOptions,
   Test / parallelExecution := false,
   libraryDependencies ++= Seq(
-    "org.scalameta"  %% "munit" % "0.7.25" % Test
+    "org.scalameta"  %% "munit" % "0.7.28" % Test
   ),
-  scalaVersion := "3.0.0"
+  scalaVersion := "3.2.1"
 )
