@@ -63,7 +63,7 @@ lazy val commonSettings = Seq(
   scalacOptions ++= compilerOptions,
   Test / parallelExecution := false,
   libraryDependencies ++= Seq(
-    "org.scalameta"  %% "munit" % "0.7.25" % Test
+    "org.scalameta"  %% "munit" % "0.7.28" % Test
   ),
   scalaVersion := "3.2.1"
 )
